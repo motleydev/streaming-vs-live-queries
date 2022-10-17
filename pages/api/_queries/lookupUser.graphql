@@ -1,0 +1,6 @@
+query CheckUser($username: String) {
+  user(where: { username: { _eq: $username } }) {
+    id
+    username
+  }
+}

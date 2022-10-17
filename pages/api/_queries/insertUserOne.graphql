@@ -1,0 +1,7 @@
+mutation InsertUserOne($username: String!, $slug: String!) {
+  insert_user_one(object: { username: $username, canvas_slug: $slug }) {
+    id
+    username
+    canvas_slug
+  }
+}

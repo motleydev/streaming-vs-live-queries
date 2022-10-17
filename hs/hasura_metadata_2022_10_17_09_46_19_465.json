@@ -1,0 +1,167 @@
+{
+  "resource_version": 33,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "default",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "name": "canvas",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "messages",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "id": "canvas_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "canvas_message",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "players",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "slug": "canvas_slug"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "user",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "canvas_message",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "canvas",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "canvas_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "canvas",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "user",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "user_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "user",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "colors",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "shapes",
+              "schema": "public"
+            },
+            "is_enum": true
+          },
+          {
+            "table": {
+              "name": "user",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "canvas",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "canvas_slug": "slug"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "canvas",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "messages",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "id": "user_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "canvas_message",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "anonymous",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "username"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "database_url": {
+              "from_env": "PG_DB"
+            },
+            "isolation_level": "read-committed",
+            "use_prepared_statements": false
+          }
+        },
+        "customization": {
+          "naming_convention": "hasura-default"
+        }
+      }
+    ]
+  }
+}
