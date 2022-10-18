@@ -20,7 +20,7 @@ export default function RegisterUser({}: Props) {
   console.log(query);
   return (
     <form onSubmit={submit} className="space-y-4 space-x-4 p-4">
-      <p>What's your username?</p>
+      <p>{"What's your username?"}</p>
       <input
         type="text"
         onChange={(e) => {
