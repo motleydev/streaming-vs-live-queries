@@ -175,9 +175,13 @@ export type Canvas_Message = {
   canvas?: Maybe<Canvas>;
   canvas_slug: Scalars['String'];
   color?: Maybe<Colors_Enum>;
+  /** An object relationship */
+  colorByColor?: Maybe<Colors>;
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
   shape?: Maybe<Shapes_Enum>;
+  /** An object relationship */
+  shapeByShape?: Maybe<Shapes>;
   updated_at: Scalars['timestamptz'];
   /** An object relationship */
   user?: Maybe<User>;
@@ -228,9 +232,11 @@ export type Canvas_Message_Bool_Exp = {
   canvas?: InputMaybe<Canvas_Bool_Exp>;
   canvas_slug?: InputMaybe<String_Comparison_Exp>;
   color?: InputMaybe<Colors_Enum_Comparison_Exp>;
+  colorByColor?: InputMaybe<Colors_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   shape?: InputMaybe<Shapes_Enum_Comparison_Exp>;
+  shapeByShape?: InputMaybe<Shapes_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<User_Bool_Exp>;
   user_id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -247,9 +253,11 @@ export type Canvas_Message_Insert_Input = {
   canvas?: InputMaybe<Canvas_Obj_Rel_Insert_Input>;
   canvas_slug?: InputMaybe<Scalars['String']>;
   color?: InputMaybe<Colors_Enum>;
+  colorByColor?: InputMaybe<Colors_Obj_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   shape?: InputMaybe<Shapes_Enum>;
+  shapeByShape?: InputMaybe<Shapes_Obj_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user?: InputMaybe<User_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['uuid']>;
@@ -314,9 +322,11 @@ export type Canvas_Message_Order_By = {
   canvas?: InputMaybe<Canvas_Order_By>;
   canvas_slug?: InputMaybe<Order_By>;
   color?: InputMaybe<Order_By>;
+  colorByColor?: InputMaybe<Colors_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   shape?: InputMaybe<Order_By>;
+  shapeByShape?: InputMaybe<Shapes_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<User_Order_By>;
   user_id?: InputMaybe<Order_By>;
@@ -504,8 +514,32 @@ export type Canvas_Updates = {
 /** columns and relationships of "colors" */
 export type Colors = {
   __typename?: 'colors';
+  /** An array relationship */
+  canvas_messages: Array<Canvas_Message>;
+  /** An aggregate relationship */
+  canvas_messages_aggregate: Canvas_Message_Aggregate;
   description?: Maybe<Scalars['String']>;
   value: Scalars['String'];
+};
+
+
+/** columns and relationships of "colors" */
+export type ColorsCanvas_MessagesArgs = {
+  distinct_on?: InputMaybe<Array<Canvas_Message_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Canvas_Message_Order_By>>;
+  where?: InputMaybe<Canvas_Message_Bool_Exp>;
+};
+
+
+/** columns and relationships of "colors" */
+export type ColorsCanvas_Messages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Canvas_Message_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Canvas_Message_Order_By>>;
+  where?: InputMaybe<Canvas_Message_Bool_Exp>;
 };
 
 /** aggregated selection of "colors" */
@@ -535,6 +569,7 @@ export type Colors_Bool_Exp = {
   _and?: InputMaybe<Array<Colors_Bool_Exp>>;
   _not?: InputMaybe<Colors_Bool_Exp>;
   _or?: InputMaybe<Array<Colors_Bool_Exp>>;
+  canvas_messages?: InputMaybe<Canvas_Message_Bool_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   value?: InputMaybe<String_Comparison_Exp>;
 };
@@ -563,6 +598,7 @@ export type Colors_Enum_Comparison_Exp = {
 
 /** input type for inserting data into table "colors" */
 export type Colors_Insert_Input = {
+  canvas_messages?: InputMaybe<Canvas_Message_Arr_Rel_Insert_Input>;
   description?: InputMaybe<Scalars['String']>;
   value?: InputMaybe<Scalars['String']>;
 };
@@ -590,6 +626,13 @@ export type Colors_Mutation_Response = {
   returning: Array<Colors>;
 };
 
+/** input type for inserting object relation for remote table "colors" */
+export type Colors_Obj_Rel_Insert_Input = {
+  data: Colors_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Colors_On_Conflict>;
+};
+
 /** on_conflict condition type for table "colors" */
 export type Colors_On_Conflict = {
   constraint: Colors_Constraint;
@@ -599,6 +642,7 @@ export type Colors_On_Conflict = {
 
 /** Ordering options when selecting data from "colors". */
 export type Colors_Order_By = {
+  canvas_messages_aggregate?: InputMaybe<Canvas_Message_Aggregate_Order_By>;
   description?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
@@ -1135,8 +1179,32 @@ export type Query_RootUser_By_PkArgs = {
 /** columns and relationships of "shapes" */
 export type Shapes = {
   __typename?: 'shapes';
+  /** An array relationship */
+  canvas_messages: Array<Canvas_Message>;
+  /** An aggregate relationship */
+  canvas_messages_aggregate: Canvas_Message_Aggregate;
   description?: Maybe<Scalars['String']>;
   value: Scalars['String'];
+};
+
+
+/** columns and relationships of "shapes" */
+export type ShapesCanvas_MessagesArgs = {
+  distinct_on?: InputMaybe<Array<Canvas_Message_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Canvas_Message_Order_By>>;
+  where?: InputMaybe<Canvas_Message_Bool_Exp>;
+};
+
+
+/** columns and relationships of "shapes" */
+export type ShapesCanvas_Messages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Canvas_Message_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Canvas_Message_Order_By>>;
+  where?: InputMaybe<Canvas_Message_Bool_Exp>;
 };
 
 /** aggregated selection of "shapes" */
@@ -1166,6 +1234,7 @@ export type Shapes_Bool_Exp = {
   _and?: InputMaybe<Array<Shapes_Bool_Exp>>;
   _not?: InputMaybe<Shapes_Bool_Exp>;
   _or?: InputMaybe<Array<Shapes_Bool_Exp>>;
+  canvas_messages?: InputMaybe<Canvas_Message_Bool_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   value?: InputMaybe<String_Comparison_Exp>;
 };
@@ -1195,6 +1264,7 @@ export type Shapes_Enum_Comparison_Exp = {
 
 /** input type for inserting data into table "shapes" */
 export type Shapes_Insert_Input = {
+  canvas_messages?: InputMaybe<Canvas_Message_Arr_Rel_Insert_Input>;
   description?: InputMaybe<Scalars['String']>;
   value?: InputMaybe<Scalars['String']>;
 };
@@ -1222,6 +1292,13 @@ export type Shapes_Mutation_Response = {
   returning: Array<Shapes>;
 };
 
+/** input type for inserting object relation for remote table "shapes" */
+export type Shapes_Obj_Rel_Insert_Input = {
+  data: Shapes_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Shapes_On_Conflict>;
+};
+
 /** on_conflict condition type for table "shapes" */
 export type Shapes_On_Conflict = {
   constraint: Shapes_Constraint;
@@ -1231,6 +1308,7 @@ export type Shapes_On_Conflict = {
 
 /** Ordering options when selecting data from "shapes". */
 export type Shapes_Order_By = {
+  canvas_messages_aggregate?: InputMaybe<Canvas_Message_Aggregate_Order_By>;
   description?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
@@ -1767,7 +1845,7 @@ export type GetAllMessagesSubscriptionVariables = Exact<{
 }>;
 
 
-export type GetAllMessagesSubscription = { __typename?: 'subscription_root', canvas: Array<{ __typename?: 'canvas', id: any, messages: Array<{ __typename?: 'canvas_message', shape?: Shapes_Enum | null, color?: Colors_Enum | null, id: any, user?: { __typename?: 'user', username: string } | null }> }> };
+export type GetAllMessagesSubscription = { __typename?: 'subscription_root', canvas: Array<{ __typename?: 'canvas', messages: Array<{ __typename?: 'canvas_message', shape?: Shapes_Enum | null, color?: Colors_Enum | null, id: any, user?: { __typename?: 'user', username: string } | null }> }> };
 
 export type GetColorsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1790,7 +1868,7 @@ export type GetShapesQuery = { __typename?: 'query_root', shapes: Array<{ __type
 
 export const InsertUserOneDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertUserOne"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_user_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"canvas_slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"canvas_slug"}}]}}]}}]} as unknown as DocumentNode<InsertUserOneMutation, InsertUserOneMutationVariables>;
 export const CheckUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CheckUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"username"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode<CheckUserQuery, CheckUserQueryVariables>;
-export const GetAllMessagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"GetAllMessages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"canvas_slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"canvas"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"canvas_slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"messages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shape"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAllMessagesSubscription, GetAllMessagesSubscriptionVariables>;
+export const GetAllMessagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"GetAllMessages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"canvas_slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"canvas"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"canvas_slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"messages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shape"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAllMessagesSubscription, GetAllMessagesSubscriptionVariables>;
 export const GetColorsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetColors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"colors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetColorsQuery, GetColorsQueryVariables>;
 export const UpsertMessageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpsertMessage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"shape"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"shapes_enum"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"color"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"colors_enum"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_canvas_message_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"shape"},"value":{"kind":"Variable","name":{"kind":"Name","value":"shape"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"color"},"value":{"kind":"Variable","name":{"kind":"Name","value":"color"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"on_conflict"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"constraint"},"value":{"kind":"EnumValue","value":"game_message_pkey"}},{"kind":"ObjectField","name":{"kind":"Name","value":"update_columns"},"value":{"kind":"EnumValue","value":"color"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpsertMessageMutation, UpsertMessageMutationVariables>;
 export const GetShapesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetShapes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shapes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<GetShapesQuery, GetShapesQueryVariables>;
