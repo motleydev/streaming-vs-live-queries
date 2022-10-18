@@ -1,0 +1,12 @@
+subscription GetAllMessages($canvas_slug: String) {
+  canvas(where: { slug: { _eq: $canvas_slug } }) {
+    messages {
+      shape
+      color
+      id
+      user {
+        username
+      }
+    }
+  }
+}

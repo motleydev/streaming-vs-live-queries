@@ -1,0 +1,8 @@
+mutation UpsertMessage($shape: shapes_enum, $color: colors_enum) {
+  insert_canvas_message_one(
+    object: { shape: $shape, color: $color }
+    on_conflict: { constraint: game_message_pkey, update_columns: color }
+  ) {
+    id
+  }
+}

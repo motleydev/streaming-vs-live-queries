@@ -22,11 +22,12 @@ const wsClient = () =>
     ),
     connectionParams: async () => {
       const token = useStore.getState().user.token;
+      const { canvasToken } = useStore.getState();
 
       return !isServerSide && token
         ? {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${canvasToken || token}`,
             },
           }
         : {};
@@ -57,8 +58,7 @@ const clientConfig = {
   url: process.env.NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT as string,
   fetchOptions: () => {
     const token = useStore.getState().user.token;
-
-    return isServerSide
+    const headers = isServerSide
       ? {
           headers: {
             "X-Hasura-Admin-Secret": process.env.HASURA_ADMIN_SECRET as string,
@@ -69,6 +69,7 @@ const clientConfig = {
           Authorization: `Bearer ${token}`,
         }
       : {};
+    return headers;
   },
   exchanges: [
     dedupExchange,

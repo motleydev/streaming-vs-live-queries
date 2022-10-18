@@ -22,7 +22,7 @@ const config: CodegenConfig = {
       preset: "client",
       plugins: [],
       config: {
-        withHooks: true,
+        // withHooks: true,
       },
     },
   },

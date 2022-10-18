@@ -19,8 +19,8 @@ interface GenerateJWTParams {
 export function generateJWT(params: GenerateJWTParams): string {
   const payload = {
     "https://hasura.io/jwt/claims": {
-      "x-hasura-allowed-roles": ["user"],
-      "x-hasura-default-role": "user",
+      "x-hasura-allowed-roles": ["user", "generic_user"],
+      "x-hasura-default-role": "generic_user",
       ...params.otherClaims,
     },
   };

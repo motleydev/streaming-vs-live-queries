@@ -3,7 +3,7 @@ import { devtools, persist } from "zustand/middleware";
 import Cookies from "js-cookie";
 import Router from "next/router";
 
-import { User } from "../gql/graphql";
+import { User, Canvas_Message } from "../gql/graphql";
 
 import { GraphQLError } from "graphql";
 
@@ -35,9 +35,13 @@ interface LocalUser extends Partial<User> {
 interface CanvasGame {
   user: LocalUser;
   formStatus: FORMSTATUS;
+  message: Partial<Canvas_Message>;
+  canvasToken: string;
   register: (username: string, slug: string) => void;
   logOut: () => void;
   setUser: (user: LocalUser) => void;
+  setMessage: (message: Partial<Canvas_Message>) => void;
+  setCanvasToken: (message: string) => void;
 }
 
 const useStore = create<CanvasGame>()(
@@ -45,7 +49,16 @@ const useStore = create<CanvasGame>()(
     persist(
       (set, get) => ({
         user: { authed: AUTH.NOT_AUTHED },
+        canvasToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLWFsbG93ZWQtcm9sZXMiOlsiY2FudmFzIl0sIngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6ImNhbnZhcyJ9LCJpYXQiOjE2NjYwNTEzMDh9.3M6gXxOFTHeNwjIWQXcuORB1b0zCuVPPdidVRDH2MiU",
         formStatus: FORMSTATUS.PRISTINE,
+        message: {},
+        setMessage: (payload) => {
+          set({ message: { ...get().message, ...payload } });
+        },
+        setCanvasToken: (token) => {
+          set({ canvasToken: token });
+        },
         setUser: (user) => {
           set({ user });
         },
