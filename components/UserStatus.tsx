@@ -12,65 +12,25 @@ import {
   UpsertMessageMutationVariables,
 } from "../gql/graphql";
 
+import Polygon from "./PolygonSVG";
+import Square from "./SquareSvg";
+import Circle from "./CircleSvg";
+import Triangle from "./TriangleSvg";
+import Octagon from "./OctagonSVG";
+
 import { client } from "../utils/client";
-
-function Circle() {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      width="100%"
-      height="100%"
-      className="stroke-current stroke-2 fill-transparent active:fill-neutral transform"
-    >
-      <circle r={40} cx={"50%"} cy={"50%"} stroke="inherit" fill="inherit" />
-    </svg>
-  );
-}
-
-function Square() {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      width="100%"
-      height="100%"
-      className="stroke-current stroke-2 fill-transparent active:fill-neutral transform"
-    >
-      <rect
-        width="80"
-        height="80"
-        x="10"
-        y="10"
-        fill="inherit"
-        stroke="inherit"
-      />
-    </svg>
-  );
-}
-
-function Triangle() {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      width="100%"
-      height="100%"
-      className="stroke-current stroke-2 fill-transparent active:fill-neutral transform"
-    >
-      <polygon points="50,10 90,90 10,90" fill="inherit" stroke="inherit" />
-    </svg>
-  );
-}
 
 type Props = {};
 
-const SHAPES: Record<Shapes_Enum[number], Function> = {
+export const SHAPES: Record<Shapes_Enum[number], Function> = {
   square: Square,
   circle: Circle,
   triangle: Triangle,
-  octagon: Triangle,
-  poly: Triangle,
+  octagon: Octagon,
+  poly: Polygon,
 };
 
-const COLORS: Record<Colors_Enum[number], string> = {
+export const COLORS: Record<Colors_Enum[number], string> = {
   red: "text-red-600",
   green: "text-green-400",
   blue: "text-blue-400",

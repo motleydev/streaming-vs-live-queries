@@ -7,6 +7,7 @@ import {
 } from "../gql/graphql";
 import { useStore } from "../store/store";
 import { client } from "../utils/client";
+import { SHAPES, COLORS } from "./UserStatus";
 
 type Props = {
   slug: string;
@@ -15,7 +16,6 @@ type Props = {
 export default function CanvasSVG({ slug }: Props) {
   const [items, setItems] = useState<GetAllMessagesSubscription>();
   const { canvasToken } = useStore();
-
   useEffect(() => {
     const { unsubscribe } = pipe(
       client.subscription<
@@ -42,8 +42,20 @@ export default function CanvasSVG({ slug }: Props) {
       })
     );
 
-    // return unsubscribe;
+    return unsubscribe;
   }, [slug, canvasToken]);
 
-  return <div>{JSON.stringify(items)}</div>;
+  return (
+    <div className="grid grid-cols-6">
+      {items?.canvas[0].messages.map((message) => {
+        const { color, shape } = message;
+        const classColor = color ? COLORS[color] : "text-white";
+        return (
+          <div key={color} className={`${classColor}`}>
+            {shape ? SHAPES[shape]() : <></>}
+          </div>
+        );
+      })}
+    </div>
+  );
 }

@@ -1,0 +1,11 @@
+subscription EventStream($slug: String, $date: timestamptz) {
+  canvas_message_stream(
+    where: { canvas_slug: { _eq: $slug } }
+    batch_size: 3
+    cursor: { ordering: ASC, initial_value: { updated_at: $date } }
+  ) {
+    id
+    color
+    shape
+  }
+}

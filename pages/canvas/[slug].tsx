@@ -6,6 +6,26 @@ const DynamicCanvasSVG = dynamic(() => import("../../components/CanvasSVG"), {
   ssr: false,
 });
 
+const DynamicAggregateColors = dynamic(
+  () => import("../../components/CountColors"),
+  {
+    ssr: false,
+  }
+);
+const DynamicAggregateShapes = dynamic(
+  () => import("../../components/CountShapes"),
+  {
+    ssr: false,
+  }
+);
+
+const DynamicEventStream = dynamic(
+  () => import("../../components/MessageStream"),
+  {
+    ssr: false,
+  }
+);
+
 type Data = {
   slug: string;
   qr: string;
@@ -16,8 +36,13 @@ const Canvas = ({
   qr,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <div className="h-full">
-      {slug}
+    <div className="h-full space-y-6">
+      <article className="prose">
+        <h1>{slug}</h1>
+      </article>
+      <DynamicAggregateColors />
+      <DynamicAggregateShapes />
+      <DynamicEventStream slug={slug} />
       <DynamicCanvasSVG slug={slug} />
       <div className="fixed bottom-0 right-24 w-96 h-96 bg-neutral-focus rounded-t-lg flex items-center justify-center overflow-clip">
         <img src={qr} />

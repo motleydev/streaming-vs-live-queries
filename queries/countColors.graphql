@@ -1,0 +1,29 @@
+subscription ColorsAggregate(
+  $red: colors_enum
+  $green: colors_enum
+  $blue: colors_enum
+  $yellow: colors_enum
+) {
+  canvas {
+    red: messages_aggregate(where: { color: { _eq: $red } }) {
+      aggregate {
+        count
+      }
+    }
+    green: messages_aggregate(where: { color: { _eq: $green } }) {
+      aggregate {
+        count
+      }
+    }
+    blue: messages_aggregate(where: { color: { _eq: $blue } }) {
+      aggregate {
+        count
+      }
+    }
+    yellow: messages_aggregate(where: { color: { _eq: $yellow } }) {
+      aggregate {
+        count
+      }
+    }
+  }
+}

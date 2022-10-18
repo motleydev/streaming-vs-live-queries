@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import { useFrame, ThreeElements, Vector3, useThree } from "@react-three/fiber";
 import { Box, useHelper } from "@react-three/drei";
 import { BoxHelper } from "three";
-import { MARGIN } from "./Shapes";
 
 type Props = {
   color: string;

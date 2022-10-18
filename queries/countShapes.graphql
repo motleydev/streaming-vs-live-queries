@@ -1,0 +1,35 @@
+subscription ShapesAggregate(
+  $circle: shapes_enum
+  $square: shapes_enum
+  $triangle: shapes_enum
+  $octagon: shapes_enum
+  $poly: shapes_enum
+) {
+  canvas {
+    circle: messages_aggregate(where: { shape: { _eq: $circle } }) {
+      aggregate {
+        count
+      }
+    }
+    square: messages_aggregate(where: { shape: { _eq: $square } }) {
+      aggregate {
+        count
+      }
+    }
+    triangle: messages_aggregate(where: { shape: { _eq: $triangle } }) {
+      aggregate {
+        count
+      }
+    }
+    octagon: messages_aggregate(where: { shape: { _eq: $octagon } }) {
+      aggregate {
+        count
+      }
+    }
+    poly: messages_aggregate(where: { shape: { _eq: $poly } }) {
+      aggregate {
+        count
+      }
+    }
+  }
+}

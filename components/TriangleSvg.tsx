@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {};
 
-export default function Square() {
+export default function Triangle() {
   return (
     <svg
       viewBox="0 0 100 100"
@@ -10,14 +10,7 @@ export default function Square() {
       height="100%"
       className="stroke-current stroke-2 fill-transparent active:fill-neutral transform"
     >
-      <rect
-        width="80"
-        height="80"
-        x="10"
-        y="10"
-        fill="inherit"
-        stroke="inherit"
-      />
+      <polygon points="50,10 90,90 10,90" fill="inherit" stroke="inherit" />
     </svg>
   );
 }
