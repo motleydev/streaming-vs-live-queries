@@ -47,11 +47,11 @@ export default function CanvasSVG({ slug }: Props) {
 
   return (
     <div className="grid grid-cols-6">
-      {items?.canvas[0].messages.map((message) => {
+      {items?.canvas[0].messages.map((message, index) => {
         const { color, shape } = message;
         const classColor = color ? COLORS[color] : "text-white";
         return (
-          <div key={color} className={`${classColor}`}>
+          <div key={index} className={`${classColor}`}>
             {shape ? SHAPES[shape]() : <></>}
           </div>
         );

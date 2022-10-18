@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState } from "react";
 import {
   EventStreamDocument,
@@ -10,7 +9,7 @@ import { client } from "../utils/client";
 
 import { formatISO } from "date-fns";
 import { useStore } from "../store/store";
-import { SHAPES } from "./UserStatus";
+import { COLORS, SHAPES } from "./UserStatus";
 
 type Props = {
   slug: string;
@@ -46,19 +45,24 @@ export default function MessageStream({ slug }: Props) {
           console.log(result.error);
         }
         setItems((items) => {
-          [...items, ...result.data?.canvas_message_stream];
+          const oldData = items ? items : [];
+          const newData = result.data?.canvas_message_stream
+            ? result.data?.canvas_message_stream
+            : [];
+          return [...oldData, ...newData];
         });
       })
     );
 
     return unsubscribe;
-  }, []);
+  }, [canvasToken]);
   return (
     <div className="flex gap-x-6">
       {items &&
         items.map((item, index) => {
+          const classColor = item.color ? COLORS[item.color] : "text-white";
           return (
-            <div key={index} className="flex gap-x-4">
+            <div key={index} className={`${classColor} flex gap-x-4`}>
               <div className="w-6 h-6">{SHAPES[item.shape!]()}</div>
             </div>
           );
