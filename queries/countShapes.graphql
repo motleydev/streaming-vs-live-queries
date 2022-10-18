@@ -4,8 +4,9 @@ subscription ShapesAggregate(
   $triangle: shapes_enum
   $octagon: shapes_enum
   $poly: shapes_enum
+  $slug: String
 ) {
-  canvas {
+  canvas(where: { slug: { _eq: $slug } }) {
     circle: messages_aggregate(where: { shape: { _eq: $circle } }) {
       aggregate {
         count

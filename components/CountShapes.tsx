@@ -12,13 +12,15 @@ import { useStore } from "../store/store";
 import { client } from "../utils/client";
 import { SHAPES } from "./UserStatus";
 
-type Props = {};
+type Props = {
+  slug: string;
+};
 
 type Aliased =
   | Record<string, ShapesAggregateSubscription["canvas"][number]["circle"]>
   | undefined;
 
-export default function CountShapes({}: Props) {
+export default function CountShapes({ slug }: Props) {
   const [items, setItems] = useState<Aliased>();
   const { canvasToken } = useStore();
 
@@ -35,6 +37,7 @@ export default function CountShapes({}: Props) {
           triangle: "triangle" as InputMaybe<Shapes_Enum>,
           octagon: "octagon" as InputMaybe<Shapes_Enum>,
           poly: "poly" as InputMaybe<Shapes_Enum>,
+          slug,
         },
         {
           fetchOptions: {

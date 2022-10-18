@@ -65,6 +65,7 @@ const useStore = create<CanvasGame>()(
         logOut: () => {
           set({
             user: { authed: AUTH.NOT_AUTHED },
+            message: {},
             formStatus: FORMSTATUS.PRISTINE,
           });
           Cookies.remove(`canvas-${Router.query.slug}`);

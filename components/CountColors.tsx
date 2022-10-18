@@ -11,13 +11,15 @@ import { pipe, subscribe } from "wonka";
 import { useStore } from "../store/store";
 import { client } from "../utils/client";
 
-type Props = {};
+type Props = {
+  slug: string;
+};
 
 type Aliased =
   | Record<string, ColorsAggregateSubscription["canvas"][number]["red"]>
   | undefined;
 
-export default function CountColors({}: Props) {
+export default function CountColors({ slug }: Props) {
   const [items, setItems] = useState<Aliased>();
   const { canvasToken } = useStore();
 
@@ -33,6 +35,7 @@ export default function CountColors({}: Props) {
           green: "green" as InputMaybe<Colors_Enum>,
           blue: "blue" as InputMaybe<Colors_Enum>,
           yellow: "yellow" as InputMaybe<Colors_Enum>,
+          slug,
         },
         {
           fetchOptions: {

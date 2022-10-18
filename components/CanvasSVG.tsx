@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { pipe, subscribe } from "wonka";
 import {
+  CreateCanvasDocument,
   GetAllMessagesDocument,
   GetAllMessagesSubscription,
   GetAllMessagesSubscriptionVariables,
 } from "../gql/graphql";
 import { useStore } from "../store/store";
 import { client } from "../utils/client";
+import CreateGameButton from "./CreateGameButton";
 import { SHAPES, COLORS } from "./UserStatus";
 
 type Props = {
@@ -47,15 +49,17 @@ export default function CanvasSVG({ slug }: Props) {
 
   return (
     <div className="grid grid-cols-6">
-      {items?.canvas[0].messages.map((message, index) => {
-        const { color, shape } = message;
-        const classColor = color ? COLORS[color] : "text-white";
-        return (
-          <div key={index} className={`${classColor}`}>
-            {shape ? SHAPES[shape]() : <></>}
-          </div>
-        );
-      })}
+      {!items?.canvas.length && <CreateGameButton slug={slug} />}
+      {!!items?.canvas?.length &&
+        items?.canvas[0].messages.map((message, index) => {
+          const { color, shape } = message;
+          const classColor = color ? COLORS[color] : "text-white";
+          return (
+            <div key={index} className={`${classColor}`}>
+              {shape ? SHAPES[shape]() : <></>}
+            </div>
+          );
+        })}
     </div>
   );
 }

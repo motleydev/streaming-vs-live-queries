@@ -23,11 +23,12 @@ const wsClient = () =>
     connectionParams: async () => {
       const token = useStore.getState().user.token;
       const { canvasToken } = useStore.getState();
+      const someToken = canvasToken || token;
 
-      return !isServerSide && token
+      return !isServerSide && someToken
         ? {
             headers: {
-              Authorization: `Bearer ${canvasToken || token}`,
+              Authorization: `Bearer ${someToken}`,
             },
           }
         : {};

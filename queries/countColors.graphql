@@ -3,8 +3,9 @@ subscription ColorsAggregate(
   $green: colors_enum
   $blue: colors_enum
   $yellow: colors_enum
+  $slug: String
 ) {
-  canvas {
+  canvas(where: { slug: { _eq: $slug } }) {
     red: messages_aggregate(where: { color: { _eq: $red } }) {
       aggregate {
         count

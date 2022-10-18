@@ -40,8 +40,8 @@ const Canvas = ({
       <article className="prose">
         <h1>{slug}</h1>
       </article>
-      <DynamicAggregateColors />
-      <DynamicAggregateShapes />
+      <DynamicAggregateColors slug={slug} />
+      <DynamicAggregateShapes slug={slug} />
       <DynamicEventStream slug={slug} />
       <DynamicCanvasSVG slug={slug} />
       <div className="fixed bottom-0 right-24 w-96 h-96 bg-neutral-focus rounded-t-lg flex items-center justify-center overflow-clip">
