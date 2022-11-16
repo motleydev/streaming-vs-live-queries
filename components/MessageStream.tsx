@@ -29,7 +29,7 @@ export default function MessageStream({ slug }: Props) {
       >(
         EventStreamDocument,
         {
-          date: formatISO(new Date()),
+          date: "2022-10-17T17:32:22.804353+00:00", //formatISO(new Date()),
           slug,
         },
         {
@@ -57,7 +57,7 @@ export default function MessageStream({ slug }: Props) {
     return unsubscribe;
   }, [canvasToken]);
   return (
-    <div className="flex gap-x-6">
+    <div className="flex gap-x-6 gap-y-6 flex-wrap">
       {items &&
         items.map((item, index) => {
           const classColor = item.color ? COLORS[item.color] : "text-white";

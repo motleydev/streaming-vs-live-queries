@@ -16,6 +16,19 @@ export type Scalars = {
   uuid: any;
 };
 
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Int']>;
+  _gt?: InputMaybe<Scalars['Int']>;
+  _gte?: InputMaybe<Scalars['Int']>;
+  _in?: InputMaybe<Array<Scalars['Int']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Int']>;
+  _lte?: InputMaybe<Scalars['Int']>;
+  _neq?: InputMaybe<Scalars['Int']>;
+  _nin?: InputMaybe<Array<Scalars['Int']>>;
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['String']>;
@@ -136,7 +149,9 @@ export type Canvas_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   messages?: InputMaybe<Canvas_Message_Bool_Exp>;
+  messages_aggregate?: InputMaybe<Canvas_Message_Aggregate_Bool_Exp>;
   players?: InputMaybe<User_Bool_Exp>;
+  players_aggregate?: InputMaybe<User_Aggregate_Bool_Exp>;
   slug?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
@@ -193,6 +208,17 @@ export type Canvas_Message_Aggregate = {
   __typename?: 'canvas_message_aggregate';
   aggregate?: Maybe<Canvas_Message_Aggregate_Fields>;
   nodes: Array<Canvas_Message>;
+};
+
+export type Canvas_Message_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Canvas_Message_Aggregate_Bool_Exp_Count>;
+};
+
+export type Canvas_Message_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Canvas_Message_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Canvas_Message_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "canvas_message" */
@@ -570,6 +596,7 @@ export type Colors_Bool_Exp = {
   _not?: InputMaybe<Colors_Bool_Exp>;
   _or?: InputMaybe<Array<Colors_Bool_Exp>>;
   canvas_messages?: InputMaybe<Canvas_Message_Bool_Exp>;
+  canvas_messages_aggregate?: InputMaybe<Canvas_Message_Aggregate_Bool_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   value?: InputMaybe<String_Comparison_Exp>;
 };
@@ -1235,6 +1262,7 @@ export type Shapes_Bool_Exp = {
   _not?: InputMaybe<Shapes_Bool_Exp>;
   _or?: InputMaybe<Array<Shapes_Bool_Exp>>;
   canvas_messages?: InputMaybe<Canvas_Message_Bool_Exp>;
+  canvas_messages_aggregate?: InputMaybe<Canvas_Message_Aggregate_Bool_Exp>;
   description?: InputMaybe<String_Comparison_Exp>;
   value?: InputMaybe<String_Comparison_Exp>;
 };
@@ -1374,9 +1402,9 @@ export type Subscription_Root = {
   canvas_message_aggregate: Canvas_Message_Aggregate;
   /** fetch data from the table: "canvas_message" using primary key columns */
   canvas_message_by_pk?: Maybe<Canvas_Message>;
-  /** fetch data from the table in a streaming manner : "canvas_message" */
+  /** fetch data from the table in a streaming manner: "canvas_message" */
   canvas_message_stream: Array<Canvas_Message>;
-  /** fetch data from the table in a streaming manner : "canvas" */
+  /** fetch data from the table in a streaming manner: "canvas" */
   canvas_stream: Array<Canvas>;
   /** fetch data from the table: "colors" */
   colors: Array<Colors>;
@@ -1384,7 +1412,7 @@ export type Subscription_Root = {
   colors_aggregate: Colors_Aggregate;
   /** fetch data from the table: "colors" using primary key columns */
   colors_by_pk?: Maybe<Colors>;
-  /** fetch data from the table in a streaming manner : "colors" */
+  /** fetch data from the table in a streaming manner: "colors" */
   colors_stream: Array<Colors>;
   /** fetch data from the table: "shapes" */
   shapes: Array<Shapes>;
@@ -1392,7 +1420,7 @@ export type Subscription_Root = {
   shapes_aggregate: Shapes_Aggregate;
   /** fetch data from the table: "shapes" using primary key columns */
   shapes_by_pk?: Maybe<Shapes>;
-  /** fetch data from the table in a streaming manner : "shapes" */
+  /** fetch data from the table in a streaming manner: "shapes" */
   shapes_stream: Array<Shapes>;
   /** fetch data from the table: "user" */
   user: Array<User>;
@@ -1400,7 +1428,7 @@ export type Subscription_Root = {
   user_aggregate: User_Aggregate;
   /** fetch data from the table: "user" using primary key columns */
   user_by_pk?: Maybe<User>;
-  /** fetch data from the table in a streaming manner : "user" */
+  /** fetch data from the table in a streaming manner: "user" */
   user_stream: Array<User>;
 };
 
@@ -1612,6 +1640,17 @@ export type User_Aggregate = {
   nodes: Array<User>;
 };
 
+export type User_Aggregate_Bool_Exp = {
+  count?: InputMaybe<User_Aggregate_Bool_Exp_Count>;
+};
+
+export type User_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<User_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<User_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "user" */
 export type User_Aggregate_Fields = {
   __typename?: 'user_aggregate_fields';
@@ -1651,6 +1690,7 @@ export type User_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   messages?: InputMaybe<Canvas_Message_Bool_Exp>;
+  messages_aggregate?: InputMaybe<Canvas_Message_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   username?: InputMaybe<String_Comparison_Exp>;
 };
