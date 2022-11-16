@@ -29,7 +29,7 @@ export default function MessageStream({ slug }: Props) {
       >(
         EventStreamDocument,
         {
-          date: "2022-10-17T17:32:22.804353+00:00", //formatISO(new Date()),
+          date: formatISO(new Date()),
           slug,
         },
         {
